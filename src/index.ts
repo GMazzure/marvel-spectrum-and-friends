@@ -1,10 +1,11 @@
+
 require("dotenv").config();
 import express from "express";
 import marvelApiAxiosInstance from "./services/marvelApi";
+import bodyParser from "body-parser";
 
 const app = express();
 
-const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

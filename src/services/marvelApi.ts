@@ -1,6 +1,6 @@
-const axios = require("axios")
-const moment = require("moment")
-const crypto = require("crypto")
+import axios from  "axios"
+import moment from "moment"
+import crypto from "crypto"
 
 // Config
 const baseURL = "http://gateway.marvel.com/v1/public";
@@ -11,6 +11,9 @@ const marvelApiAxiosInstance = axios.create({ baseURL, headers });
 marvelApiAxiosInstance.interceptors.request.use(
   (config) => {
     const ts = moment().unix();
+
+    if (!process.env.pvkey || !process.env.pbkey) return config;
+
     const hash = crypto
       .createHash("md5")
       .update(ts + process.env.pvkey + process.env.pbkey)
@@ -23,7 +26,7 @@ marvelApiAxiosInstance.interceptors.request.use(
       hash: hash,
     };
 
-    console.log("Request config:", config);
+    // console.log("Request config:", config);
     return config;
   },
   (error) => {
@@ -35,7 +38,7 @@ marvelApiAxiosInstance.interceptors.request.use(
 // Response interceptor
 marvelApiAxiosInstance.interceptors.response.use(
   (response) => {
-    console.log("Response data:", response.data);
+    // console.log("Response data:", response.data);
     return response.data;
   },
   (error) => {

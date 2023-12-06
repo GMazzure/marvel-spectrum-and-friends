@@ -1,7 +1,8 @@
 require("dotenv").config();
-const express = require("express");
+import express from "express";
+import marvelApiAxiosInstance from "./services/marvelApi";
+
 const app = express();
-const marvelApiAxiosInstance = require("./services/marvelApi");
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
@@ -11,6 +12,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/", async (req, res) => {
   const data = await marvelApiAxiosInstance.get("/characters/1010705/comics");
   res.send(data);
+});
+
+// Simple route to test
+app.get("/hello", async (req, res) => {
+  res.send("hello!");
 });
 
 // Start the server on port 3000

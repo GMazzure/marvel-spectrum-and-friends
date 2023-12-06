@@ -44,4 +44,4 @@ marvelApiAxiosInstance.interceptors.response.use(
   }
 );
 
-module.exports = marvelApiAxiosInstance;
+export default marvelApiAxiosInstance;

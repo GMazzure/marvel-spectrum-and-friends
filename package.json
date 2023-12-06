@@ -1,0 +1,28 @@
+{
+  "name": "marvel-api",
+  "version": "1.0.0",
+  "description": "Retrieves data from all characters that co-participated on the same comics, persists to sqlite and shows on a simple web visualization",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "marvel",
+    "spectrum",
+    "characters",
+    "comics",
+    "api",
+    "data"
+  ],
+  "author": "Gustavo Mazzure",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "body-parser": "^1.20.2",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "moment": "^2.29.4"
+  }
+}

@@ -1,0 +1,40 @@
+# Ignore node_modules folder
+node_modules/
+
+# Ignore log files
+*.log
+
+# Ignore output files
+output-*
+
+# Ignore temp files
+*.tmp
+*.temp
+
+# Ignore os generated files
+.DS_Store
+ehthumbs.db
+Thumbs.db
+
+# Ignore backup files
+*~
+*.bak
+*.swp
+*.lock
+
+# Ignore dependency lock files
+package-lock.json
+
+# Ignore REPL history
+.node_repl_history
+
+# Ignore tests, coverage, and screenshots
+/tests/
+/coverage/
+/screenshots/
+
+# Ignore dotenv files with sensitive information
+.env
+
+# Ignore vscode settings
+.vscode/

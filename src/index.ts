@@ -1,5 +1,7 @@
 
-require("dotenv").config();
+import dotenv from "dotenv"
+dotenv.config()
+
 import express from "express";
 import marvelApiAxiosInstance from "./services/marvelApi";
 import bodyParser from "body-parser";

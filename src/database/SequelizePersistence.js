@@ -1,8 +1,8 @@
-import IDatabase from './IDatabase.js';
+import IPersistance from './IPersistance.js';
 import { Sequelize, DataTypes } from 'sequelize';
 import models from './models.js';
 
-class SequelizePersistence extends IDatabase {
+class SequelizePersistence extends IPersistance {
   constructor() {
     super();
     this.sequelize = new Sequelize('sqlite:./database.db');

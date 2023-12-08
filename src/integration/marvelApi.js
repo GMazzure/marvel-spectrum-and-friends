@@ -1,10 +1,10 @@
-import axios from  "axios"
-import moment from "moment"
-import crypto from "crypto"
+import axios from 'axios';
+import moment from 'moment';
+import crypto from 'crypto';
 
 // Config
-const baseURL = "http://gateway.marvel.com/v1/public";
-const headers = { "Content-Type": "application/json" };
+const baseURL = 'http://gateway.marvel.com/v1/public';
+const headers = { 'Content-Type': 'application/json' };
 const marvelApiAxiosInstance = axios.create({ baseURL, headers });
 
 // Request interceptor
@@ -15,9 +15,9 @@ marvelApiAxiosInstance.interceptors.request.use(
     if (!process.env.pvkey || !process.env.pbkey) return config;
 
     const hash = crypto
-      .createHash("md5")
+      .createHash('md5')
       .update(ts + process.env.pvkey + process.env.pbkey)
-      .digest("hex");
+      .digest('hex');
 
     config.params = {
       ...config.params,
@@ -26,11 +26,11 @@ marvelApiAxiosInstance.interceptors.request.use(
       hash: hash,
     };
 
-    // console.log("Request config:", config);
+    // console.log('Request config:', config)
     return config;
   },
   (error) => {
-    console.log("Request error:", error);
+    console.log('Request error:', error);
     return Promise.reject(error);
   }
 );
@@ -38,11 +38,11 @@ marvelApiAxiosInstance.interceptors.request.use(
 // Response interceptor
 marvelApiAxiosInstance.interceptors.response.use(
   (response) => {
-    // console.log("Response data:", response.data);
+    // console.log('Response data:', response.data)
     return response.data;
   },
   (error) => {
-    console.log("Response error:", error);
+    console.log('Response error:', error);
     return Promise.reject(error);
   }
 );

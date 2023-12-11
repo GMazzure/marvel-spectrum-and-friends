@@ -1,7 +1,10 @@
 import HttpStatus from 'http-status-codes';
 
-const marvelCharactersController = (persistenceLayer) => {
+const marvelCharactersControllerFactory = (persistenceLayer) => {
+  /** Takes the persistence layer instance and returns injected controller functions  */
+
   const getMarvelCharacters = async (req, res) => {
+    /** returns all marvel characters as a json */
     try {
       const marvelCharacters = await persistenceLayer.getMarvelCharacters();
       if (!marvelCharacters || marvelCharacters.length === 0) {
@@ -23,6 +26,8 @@ const marvelCharactersController = (persistenceLayer) => {
   };
 
   const getMarvelCharactersToHtmlTable = async (req, res) => {
+    /** returns all marvel characters as a simple html table */
+
     try {
       const marvelCharacters = await persistenceLayer.getMarvelCharacters();
 
@@ -71,4 +76,4 @@ const marvelCharactersController = (persistenceLayer) => {
   };
 };
 
-export default marvelCharactersController;
+export default marvelCharactersControllerFactory;

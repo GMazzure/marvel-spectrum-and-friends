@@ -3,7 +3,13 @@ import { Sequelize, DataTypes } from 'sequelize';
 import models from './models.js';
 
 class SequelizePersistence extends IPersistance {
-  constructor(sequelize) {
+  constructor(sequelize=null) {
+    /**
+     * Initializes the Persistence Object
+     * @param {IPersistence} persistence - instance of the persistence layer (automatically created
+     *  if not given)
+     * @return {IPersistence} the created instance of the persistence
+     */
     super();
     if (sequelize) {
       this.sequelize = sequelize;
@@ -15,10 +21,18 @@ class SequelizePersistence extends IPersistance {
   }
 
   async syncDatabase() {
+    /** Syncs models to the database (Migration)*/
     await this.sequelize.sync();
   }
 
   async createMarvelCharacter(character_id, name, description, thumbnail_url) {
+    /** takes marvel character data and registers to the persistence layer
+     * @param {Integer} character_id - Marvel Character Id
+     * @param {String} name - Marvel Character name
+     * @param {String} description - Marvel character description
+     * @param {String} thumbnail_url - Marvel character thumbnail image
+     * @return {Object} created character
+     */
     const { MarvelCharacter } = this.models;
 
     // #TODO: Validate Marvel Character
@@ -46,6 +60,7 @@ class SequelizePersistence extends IPersistance {
   }
 
   async getMarvelCharacters() {
+    /** Returns all marvel characters from the database */
     const { MarvelCharacter } = this.sequelize.models;
     const marvelCharacters = await MarvelCharacter.findAll();
 

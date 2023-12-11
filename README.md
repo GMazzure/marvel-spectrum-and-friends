@@ -15,7 +15,7 @@
 
 ### Getting started
 
-1. Set the .env variables, copying the file .env-example to the root of the project (the same level as the .env-example file), copy and paste your Marvel API credentials
+1. Set the .env variables, copying the file .env-example to the root of the project (the same level as the .env-example file), copy and paste your Marvel API credentials to (name it to .env)
     - pbkey: public key
     - pvkey: private key
 2. Run the project with one of the options:

@@ -3,7 +3,8 @@ import marvelCharactersControllerFactory from './controllers/marvelCharactersCon
 export default (app, marvelApiAxiosInstance, persistence) => {
   const marvelCharactersController = marvelCharactersControllerFactory(persistence);
 
-  app.get('/', marvelCharactersController.getMarvelCharacters);
+  app.get('/json', marvelCharactersController.getMarvelCharacters);
+  app.get('/html', marvelCharactersController.getMarvelCharactersToHtmlTable);
 
   // Simple route to test
   app.get('/hello', async (req, res) => {

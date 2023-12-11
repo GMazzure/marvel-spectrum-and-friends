@@ -1,7 +1,4 @@
-const fetchComicsFromCharacterId = async (
-  api,
-  characterId = 1010705
-) => {
+const fetchComicsFromCharacterId = async (api, characterId = 1010705) => {
   try {
     const response = await api.get(`/characters/${characterId}/comics`);
     return response.data?.results;

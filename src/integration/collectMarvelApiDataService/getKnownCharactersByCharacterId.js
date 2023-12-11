@@ -3,16 +3,15 @@ import getDistinctCharactersFromComicIdList from './getDistinctCharactersFromCom
 
 const getKnownCharactersByCharacterId = async (api, characterId = 1010705) => {
   try {
-    const comicsByCharacterId = await fetchComicsFromCharacterId(
-      api,
-      characterId
-    );
+    const comicsByCharacterId = await fetchComicsFromCharacterId(api, characterId);
     if (!comicsByCharacterId || comicsByCharacterId.length === 0) return [];
 
     const comicIdsByCharacterId = comicsByCharacterId.map((comic) => comic.id);
 
-    const knownCharactersByCharacterId =
-      await getDistinctCharactersFromComicIdList(api, comicIdsByCharacterId);
+    const knownCharactersByCharacterId = await getDistinctCharactersFromComicIdList(
+      api,
+      comicIdsByCharacterId
+    );
 
     if (!knownCharactersByCharacterId) return [];
 

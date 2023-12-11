@@ -6,27 +6,38 @@ class SequelizePersistence extends IPersistance {
   constructor() {
     super();
     this.sequelize = new Sequelize('sqlite:./database.db');
-    models(this.sequelize, DataTypes);
-    this.sequelize.sync();
+    this.models = models(this.sequelize, DataTypes);
   }
 
-  async createMarvelCharacter(character_id, name, description, avatar_url) {
-    const { MarvelCharacter } = this.sequelize.models;
+  async syncDatabase() {
+    await this.sequelize.sync();
+  }
+
+  async createMarvelCharacter(character_id, name, description, thumbnail_url) {
+    const { MarvelCharacter } = this.models;
 
     // #TODO: Validate Marvel Character
-    const marvelCharacter = await MarvelCharacter.create({
-      character_id,
-      name,
-      description,
-      avatar_url,
-    });
+    try {
+      const marvelCharacter = await MarvelCharacter.create({
+        character_id,
+        name,
+        description: description.trim().length > 0 ? description : null,
+        thumbnail_url,
+      });
 
-    return {
-      character_id: marvelCharacter.character_id,
-      name: marvelCharacter.name,
-      description: marvelCharacter.description,
-      avatar_url: marvelCharacter.avatar_url,
-    };
+      return {
+        character_id: marvelCharacter.character_id,
+        name: marvelCharacter.name,
+        description: marvelCharacter.description,
+        thumbnail_url: marvelCharacter.thumbnail_url,
+      };
+    } catch (err) {
+      if (err.name === 'SequelizeUniqueConstraintError') {
+        console.log(`Marvel Character ${name} is already created on database`);
+      } else {
+        throw err;
+      }
+    }
   }
 
   async getMarvelCharacters() {
@@ -42,4 +53,4 @@ class SequelizePersistence extends IPersistance {
   }
 }
 
-export default new SequelizePersistence();
+export default SequelizePersistence;

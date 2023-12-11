@@ -1,40 +1,52 @@
 import dotenv from 'dotenv';
-dotenv.config();
-
 import express from 'express';
 import marvelApiAxiosInstance from './integration/marvelApi.js';
 import bodyParser from 'body-parser';
+import routes from './routes.js';
+import SequelizePersistence from './database/SequelizePersistence.js';
 
-import db from './database/Database.js';
+// .env config
+dotenv.config();
 
+// Express config
 const app = express();
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Simple route
-app.get('/', async (req, res) => {
-  const data = await marvelApiAxiosInstance.get('/characters/1010705/comics');
-  res.send(data);
-});
+// initialize and sync database
+const sequelizePersistence = new SequelizePersistence();
+await sequelizePersistence.syncDatabase();
 
-// Simple route to test
-app.get('/hello', async (req, res) => {
-  res.send('hello!');
-});
+// Collect marvel api data and store to persistence layer
+// import collectMarvelApiDataService from './integration/collectMarvelApiDataService/index.js';
+// await collectMarvelApiDataService(marvelApiAxiosInstance, sequelizePersistence);
+
+// Routing
+routes(app, marvelApiAxiosInstance);
 
 // Start the server on port 3000
 app.listen(3000, () => {
   console.log('Server is running on port 3000.');
 });
 
-app.on('close', async () => {
-  console.log('Server is shutting down');
+// Handling service exitting
+const exitGracefully = async () => {
   try {
-    await db.sequelize.close();
+    await SequelizePersistence.sequelize.close();
     console.log('Database connection closed successfully');
   } catch (error) {
-    console.error('Error closing database connection:', error);
+    console.log('Error closing database connection:', error);
   }
+};
+
+app.on('close', async () => {
+  console.log('\nServer is shutting down');
+  exitGracefully();
+  process.exit(0);
+});
+
+process.on('SIGINT', async () => {
+  console.log('\nServer is shutting down');
+  exitGracefully();
   process.exit(0);
 });

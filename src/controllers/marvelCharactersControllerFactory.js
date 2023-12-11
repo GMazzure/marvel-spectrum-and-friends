@@ -54,7 +54,7 @@ const marvelCharactersControllerFactory = (persistenceLayer) => {
           <td>${character.character_id}</td>
           <td><img src=${character.thumbnail_url} width="200"/></td>
           <td>${character.name}</td>
-          <td>${character.description}</td>
+          <td>${character.description || 'No description provided'}</td>
         </tr>`;
       });
 

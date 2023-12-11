@@ -15,6 +15,7 @@ output-*
 .DS_Store
 ehthumbs.db
 Thumbs.db
+*.db
 
 # Ignore backup files
 *~

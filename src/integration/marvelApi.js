@@ -26,7 +26,6 @@ marvelApiAxiosInstance.interceptors.request.use(
       hash: hash,
     };
 
-    // console.log('Request config:', config)
     return config;
   },
   (error) => {
@@ -38,7 +37,6 @@ marvelApiAxiosInstance.interceptors.request.use(
 // Response interceptor
 marvelApiAxiosInstance.interceptors.response.use(
   (response) => {
-    // console.log('Response data:', response.data)
     return response.data;
   },
   (error) => {

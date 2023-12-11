@@ -6,15 +6,6 @@
 /** @type {import('jest').Config} */
 const config = {
   clearMocks: true,
-  // reporters: [
-  //   'default',   
-  //   [
-  //     'jest-silent-reporter',
-  //     {
-  //       useDots: true,
-  //     },
-  //   ],
-  // ],
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
   },

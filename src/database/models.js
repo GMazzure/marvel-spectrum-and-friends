@@ -15,7 +15,6 @@ const models = (sequelize, DataTypes) => {
     }
   );
 
-  console.log('uigual?', MarvelCharacter == sequelize.models.MarvelCharacter);
   return { MarvelCharacter };
 };
 

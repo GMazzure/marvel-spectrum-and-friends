@@ -1,7 +1,6 @@
 const fetchCharactersFromComicsId = async (api, comicId) => {
   try {
     const response = await api.get(`/comics/${comicId}/characters`);
-    // console.log(`/comics/${comicId}/characters`, response);
 
     return response.data?.results;
   } catch (error) {

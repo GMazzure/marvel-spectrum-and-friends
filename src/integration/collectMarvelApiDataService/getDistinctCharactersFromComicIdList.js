@@ -9,9 +9,6 @@ const getDistinctCharactersFromComicList = async (api, comicIdList) => {
       })
     );
 
-    // const r = await fetchCharactersFromComicsId(api, comicIdList[0]);
-    // const results = [r];
-
     var characters = [];
     var characterIds = [];
     results.forEach((result) => {

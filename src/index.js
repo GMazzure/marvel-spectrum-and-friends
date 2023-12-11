@@ -18,8 +18,8 @@ const sequelizePersistence = new SequelizePersistence();
 await sequelizePersistence.syncDatabase();
 
 // Collect marvel api data and store to persistence layer
-// import collectMarvelApiDataService from './integration/collectMarvelApiDataService/index.js';
-// await collectMarvelApiDataService(marvelApiAxiosInstance, sequelizePersistence);
+import collectMarvelApiDataService from './integration/collectMarvelApiDataService/index.js';
+await collectMarvelApiDataService(marvelApiAxiosInstance, sequelizePersistence);
 
 // Routing
 routes(app, marvelApiAxiosInstance, sequelizePersistence);

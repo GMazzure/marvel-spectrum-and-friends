@@ -3,9 +3,14 @@ import { Sequelize, DataTypes } from 'sequelize';
 import models from './models.js';
 
 class SequelizePersistence extends IPersistance {
-  constructor() {
+  constructor(sequelize) {
     super();
-    this.sequelize = new Sequelize('sqlite:./database.db');
+    if (sequelize) {
+      this.sequelize = sequelize;
+    } else {
+      this.sequelize = new Sequelize('sqlite:./database.db');
+    }
+
     this.models = models(this.sequelize, DataTypes);
   }
 
@@ -48,7 +53,7 @@ class SequelizePersistence extends IPersistance {
       character_id: character.character_id,
       name: character.name,
       description: character.description,
-      avatar_url: character.avatar_url,
+      thumbnail_url: character.thumbnail_url,
     }));
   }
 }
